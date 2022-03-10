@@ -3,62 +3,35 @@ import React from "react"
 // Construct some way of advancing from this date for like idk, 100 ranges? Linked list?
 // Then find todays date and find the closest date before it that is in our list
 const anchor_date = new Date("2022-02-19");
-// const anchor_date = new Date("2022-12-25");
-
-function dayToStr(date) {
-  if (date > 6) date %= 7
-
-  switch(date){
-    case 0: return "Mon"
-    case 1: return "Tues"
-    case 2: return "Wed"
-    case 3: return "Thurs"
-    case 4: return "Fri"
-    case 5: return "Sat"
-    case 6: return "Sun"
-  }
-}
-
-function monthToStr(month) {
-  switch(month){
-    case 1: return "Jan";
-    case 2: return "Feb";
-    case 3: return "Mar";
-    case 4: return "Apr";
-    case 5: return "May";
-    case 6: return "Jun";
-    case 7: return "Jul";
-    case 8: return "Aug";
-    case 9: return "Sep";
-    case 10: return "Oct";
-    case 11: return "Nov";
-    case 12: return "Dec";  
-  }
-}
+const anchor_day = "Sat"; //Make this variable and inputtable
 
 Date.prototype.addDays = function (days){
    const date = new Date(this.valueOf());
    date.setDate(date.getDate() + days);
    return date;
 }
-//Biweek range from Saturday - Saturday - Friday, Next range starts on Saturday
-function getDates(){
-  //fuck moments im gonna do it myself because im stubborn also moments are deprecated get shit on
-  var dates = new Array(14);
 
-  for (var i = 0; i < 14; i++){
-      var date_fmt = "";
+function parseDate(date){
+    var fmt = "";
+    var spl = date.toString().split(" ");
 
-      var curr_date = anchor_date.addDays(i); // For some reason this is incrementing everything by 1
+    fmt += spl[0] + " " + spl[1] + " " + spl[2];
 
-      date_fmt += dayToStr(curr_date.getDay()) + " "
-      date_fmt += monthToStr((curr_date.getMonth()))+" "+(curr_date.getDate())
+    return fmt;
+}
 
-      dates[i] = date_fmt;
-  }
-  
+// Returns a formatted array from the anchor day to the next 14 days
+// TODO: Make length of pay-period variable and inputtable 
+function getDates(anchor){
+  var dates = new Array(15);
 
-  return dates
+  for (var i = 0; i < 15; i++) // Get every date from anchor -> anchor + 13 inclusive
+    dates[i] = parseDate(anchor.addDays(i));
+
+  if (dates[1].split(" ")[0] != anchor_day)
+    console.log("ERR Start day doesn't match expected range")
+
+  return dates.slice(1,15) // Cut the bad front date off
 }
 
 
@@ -81,7 +54,7 @@ export default class HourInput extends React.Component {
     }
   
     render() {
-      const d = getDates();
+      const d = getDates(anchor_date);
 
       return (
         <form onSubmit={this.handleSubmit}>
@@ -199,29 +172,6 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           </table>
-
-
-          {/* <label>
-            Monday
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label><br></br>
-          <label>
-            Tuesday
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label><br></br>
-          <label>
-            Wednesday
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label><br></br>
-          <label>
-            Thursday
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label><br></br>
-          <label>
-            Friday
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label><br></br>
-          <input type="submit" value="Submit" /> */}
         </form>
       );
     }
