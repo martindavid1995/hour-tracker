@@ -3,7 +3,7 @@ import React from "react"
 // Construct some way of advancing from this date for like idk, 100 ranges? Linked list?
 // Then find todays date and find the closest date before it that is in our list
 const anchor_date = new Date("2022-02-19");
-//const anchor_date = new Date("2022-12-25");
+// const anchor_date = new Date("2022-12-25");
 
 function dayToStr(date) {
   if (date > 6) date %= 7
@@ -32,7 +32,8 @@ function monthToStr(month) {
     case 9: return "Sep";
     case 10: return "Oct";
     case 11: return "Nov";
-    case 12: return "Dec";  }
+    case 12: return "Dec";  
+  }
 }
 
 Date.prototype.addDays = function (days){
@@ -48,7 +49,7 @@ function getDates(){
   for (var i = 0; i < 14; i++){
       var date_fmt = "";
 
-      var curr_date = anchor_date.addDays(i);
+      var curr_date = anchor_date.addDays(i); // For some reason this is incrementing everything by 1
 
       date_fmt += dayToStr(curr_date.getDay()) + " "
       date_fmt += monthToStr((curr_date.getMonth()))+" "+(curr_date.getDate())
