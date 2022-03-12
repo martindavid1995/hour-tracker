@@ -1,9 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
+import TimePicker from 'react-time-picker'
 
 // Construct some way of advancing from this date for like idk, 100 ranges? Linked list?
 // Then find todays date and find the closest date before it that is in our list
-const anchor_date = new Date("2022-02-19");
-const anchor_day = "Sat"; //Make this variable and inputtable
+// 
+// "2022-02-19"
+const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this manipulatable. 
+const anchorDay = "Sat"; //Make this variable and inputtable
+const lengthOfPayPeriod = 14;
 
 Date.prototype.addDays = function (days){
    const date = new Date(this.valueOf());
@@ -14,26 +18,59 @@ Date.prototype.addDays = function (days){
 function parseDate(date){
     var fmt = "";
     var spl = date.toString().split(" ");
-
     fmt += spl[0] + " " + spl[1] + " " + spl[2];
-
     return fmt;
 }
 
-// Returns a formatted array from the anchor day to the next 14 days
-// TODO: Make length of pay-period variable and inputtable 
-function getDates(anchor){
-  var dates = new Array(15);
-
-  for (var i = 0; i < 15; i++) // Get every date from anchor -> anchor + 13 inclusive
-    dates[i] = parseDate(anchor.addDays(i));
-
-  if (dates[1].split(" ")[0] != anchor_day)
-    console.log("ERR Start day doesn't match expected range")
-
-  return dates.slice(1,15) // Cut the bad front date off
+function makeRangeReadable(range){
+  return (parseDate(range[0]) + " to " + parseDate(range[range.length - 1]) + "\n")
 }
 
+function getLastDate(range){
+  return range[range.length - 1];
+}
+
+function generateRanges(){
+    var ranges = new Array(); //We are going to hold 300 ranges
+      
+    var currRange = getRange(anchorDate);
+    ranges.push(currRange);    
+
+    for (var i = 1; i <= 300; i++)
+      ranges.push(getRange(getLastDate(ranges.at(i-1)))); 
+       
+    // for (var j = 0; j < ranges.length; j++)
+    //   console.log(makeRangeReadable(ranges.at(j)))
+    
+    return ranges;
+}
+
+// Gets a range of dates in standard "Date" format
+function getRange(startDate) {
+  if (startDate == null)
+    startDate = anchorDate;
+  
+  var dates = new Array(lengthOfPayPeriod);
+
+  for (var i = 0; i < dates.length; i++){
+    dates[i] = startDate.addDays(i + 1);
+  }
+
+  return dates;
+}
+// Format a range into displayable format
+function formatRange(range){
+  var dates = new Array(range.length)
+  for (var i = 0; i < range.length; i++){
+    dates[i] = parseDate(range[i]);
+  }
+
+  return dates;
+}
+
+function getDates(anchor){
+  return formatRange(getRange(anchor))
+}
 
 export default class HourInput extends React.Component {
     constructor(props) {
@@ -52,10 +89,11 @@ export default class HourInput extends React.Component {
       alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
     }
-  
-    render() {
-      const d = getDates(anchor_date);
+    
 
+    render() {
+      const d = getDates(anchorDate);
+      generateRanges();
       return (
         <form onSubmit={this.handleSubmit}>
           <table>
@@ -63,7 +101,7 @@ export default class HourInput extends React.Component {
             <td>{d[0]}</td>
             <td>
               <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <input type="text" value={this.state.value} onChange={this.handleChange} /> 
               </label>
             </td>
           </tr>
