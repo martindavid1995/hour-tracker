@@ -108,16 +108,21 @@ export default class HourInput extends React.Component {
 
     render() {
       const range = getRelevantRange();
+      const today = new Date();
       var d = new Array(range.length);
+      var marker = new Array(range.length);
       for (var i = 0; i < range.length; i++){
         d[i] = parseDate(range.at(i));
+        if (parseDate(range.at(i)) === parseDate(today)){
+          marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
+        }
       }      
       
       return (
         <form onSubmit={this.handleSubmit}>
           <table>
           <tr>
-            <td></td>
+            <td>{marker[0]}</td>
             <td>{d[0]}</td>
             <td>
               <label>
@@ -126,7 +131,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[1]}</td>
             <td>{d[1]}</td>
             <td>
               <label>
@@ -135,7 +140,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[2]}</td>
             <td>{d[2]}</td>
             <td>
               <label>
@@ -144,7 +149,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[3]}</td>
             <td>{d[3]}</td>
             <td>
               <label>
@@ -153,7 +158,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[4]}</td>
             <td>{d[4]}</td>
             <td>
               <label>
@@ -162,7 +167,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[5]}</td>
             <td>{d[5]}</td>
             <td>
               <label>
@@ -171,7 +176,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td>Today</td>
+            <td>{marker[6]}</td>
             <td>{d[6]}</td>
             <td>
               <label>
@@ -180,7 +185,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[7]}</td>
             <td>{d[7]}</td>
             <td>
               <label>
@@ -189,7 +194,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[8]}</td>
             <td>{d[8]}</td>
             <td>
               <label>
@@ -198,7 +203,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[9]}</td>
             <td>{d[9]}</td>
             <td>
               <label>
@@ -207,7 +212,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[10]}</td>
             <td>{d[10]}</td>
             <td>
               <label>
@@ -216,7 +221,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[11]}</td>
             <td>{d[11]}</td>
             <td>
               <label>
@@ -225,7 +230,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[12]}</td>
             <td>{d[12]}</td>
             <td>
               <label>
@@ -234,7 +239,7 @@ export default class HourInput extends React.Component {
             </td>
           </tr>
           <tr>
-            <td></td>
+            <td>{marker[13]}</td>
             <td>{d[13]}</td>
             <td>
               <label>
