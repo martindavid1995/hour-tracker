@@ -1,19 +1,20 @@
 import React, { useState } from "react"
-import TimePicker from 'react-time-picker'
+import TimeRange from 'react-time-range'
+import moment from "moment";
 
-// Construct some way of advancing from this date for like idk, 100 ranges? Linked list?
-// Then find todays date and find the closest date before it that is in our list
-// 
-// "2022-02-19"
+
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
 const anchorDay = "Sat"; //Make this variable and inputtable
 const lengthOfPayPeriod = 14; //Make this variable and inputtable
-
+ 
+ 
 Date.prototype.addDays = function (days){
    const date = new Date(this.valueOf());
    date.setDate(date.getDate() + days);
-   return date;
-}
+   return date; 
+} 
+
+const today = new Date().addDays(0)
 
 function parseDate(date){
     var fmt = "";
@@ -46,13 +47,13 @@ function generateRanges(){
 }
  
 function getRelevantRange(){
-  const today = new Date();
+  // const today = new Date();
   var ranges = generateRanges();
   for (var i = 0; i < ranges.length; i++){
      var rng = ranges.at(i);
      for (var j = 0; j < rng.length; j++){
        if (parseDate(today) === parseDate(rng[j])){
-         console.log("Today falls within pay period: "+makeRangeReadable(rng))
+        //  console.log("Today falls within pay period: "+makeRangeReadable(rng))
          return rng;
        }
      } 
@@ -87,168 +88,123 @@ function getDates(anchor){
   return formatRange(getRange(anchor))
 }
 
+
 export default class HourInput extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {value: ''};
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+      super(props)
     }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
+
+    state = {
+      startTime: moment(), 
+      endTime: moment()
+    };
+
+    returnFunctionStart = event => {
+      this.setState({startTime: event.startTime});
     }
-  
-    handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
+
+    returnFunctionEnd = event => {
+      this.setState({endTime: event.endTime});
     }
-    
+
+    getTR(){
+      return <TimeRange 
+      onStartTimeChange = {this.returnFunctionStart}
+      onEndTimeChange = {this.returnFunctionEnd}
+      startMoment = {moment("2017-03-13 06:00")}
+      endMoment = {moment("2017-03-13 21:00")}
+      startLabel = ""
+      endLabel = " to "
+      showErrors = {true}
+    />
+    }
 
     render() {
       const range = getRelevantRange();
-      const today = new Date();
+      // const today = new Date();
       var d = new Array(range.length);
       var marker = new Array(range.length);
       for (var i = 0; i < range.length; i++){
         d[i] = parseDate(range.at(i));
-        if (parseDate(range.at(i)) === parseDate(today)){
+        if (parseDate(range.at(i)) === parseDate(today)){ //can probably get rid of the parseDate()s here
           marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
         }
       }      
-      
+    
+
       return (
-        <form onSubmit={this.handleSubmit}>
           <table>
           <tr>
-            <td>{marker[0]}</td>
-            <td>{d[0]}</td>
-            <td>
-              <label>
-                <input type="text" value={this.state.value} onChange={this.handleChange} /> 
-              </label>
-            </td>
+            <td class = "arrow">{marker[0]}</td>
+            <td class = "date">{d[0]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[1]}</td>
-            <td>{d[1]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[1]}</td>
+            <td class = "date">{d[1]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[2]}</td>
-            <td>{d[2]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[2]}</td>
+            <td class = "date">{d[2]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[3]}</td>
-            <td>{d[3]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[3]}</td>
+            <td class = "date">{d[3]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[4]}</td>
-            <td>{d[4]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[4]}</td>
+            <td class = "date">{d[4]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[5]}</td>
-            <td>{d[5]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[5]}</td>
+            <td class = "date">{d[5]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[6]}</td>
-            <td>{d[6]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[6]}</td>
+            <td class = "date">{d[6]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[7]}</td>
-            <td>{d[7]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[7]}</td>
+            <td class = "date">{d[7]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[8]}</td>
-            <td>{d[8]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+           <td class = "arrow">{marker[8]}</td>
+            <td class = "date">{d[8]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[9]}</td>
-            <td>{d[9]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[9]}</td>
+            <td class = "date">{d[9]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[10]}</td>
-            <td>{d[10]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[10]}</td>
+            <td class = "date">{d[10]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[11]}</td>
-            <td>{d[11]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[11]}</td>
+            <td class = "date">{d[11]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[12]}</td>
-            <td>{d[12]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[12]}</td>
+            <td class = "date">{d[12]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           <tr>
-            <td>{marker[13]}</td>
-            <td>{d[13]}</td>
-            <td>
-              <label>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              </label>
-            </td>
+            <td class = "arrow">{marker[13]}</td>
+            <td class = "date">{d[13]}</td>
+            <td class = "time">{this.getTR()}</td>
           </tr>
           </table>
-        </form>
       );
     }
   }
