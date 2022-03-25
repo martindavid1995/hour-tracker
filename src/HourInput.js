@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import TimeRange from 'react-time-range'
+import TimeSelector from './TimeSelector'
 import moment from "moment";
+import DropDown from "./TimeSelector";
 
 
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
-const anchorDay = "Sat"; //Make this variable and inputtable
-const lengthOfPayPeriod = 14; //Make this variable and inputtable
+const anchorDay = "Sat";
+const lengthOfPayPeriod = 14; 
  
  
 Date.prototype.addDays = function (days){
@@ -89,120 +91,109 @@ function getDates(anchor){
 }
 
 
+
 export default class HourInput extends React.Component {
+
     constructor(props) {
       super(props)
     }
-
-    state = {
-      startTime: moment(), 
-      endTime: moment()
-    };
-
-    returnFunctionStart = event => {
-      this.setState({startTime: event.startTime});
-    }
-
-    returnFunctionEnd = event => {
-      this.setState({endTime: event.endTime});
-    }
-
-    getTR(){
-      return <TimeRange 
-      onStartTimeChange = {this.returnFunctionStart}
-      onEndTimeChange = {this.returnFunctionEnd}
-      startMoment = {moment("2017-03-13 06:00")}
-      endMoment = {moment("2017-03-13 21:00")}
-      startLabel = ""
-      endLabel = " to "
-      showErrors = {true}
-    />
-    }
-
+    
     render() {
       const range = getRelevantRange();
-      // const today = new Date();
       var d = new Array(range.length);
       var marker = new Array(range.length);
       for (var i = 0; i < range.length; i++){
-        d[i] = parseDate(range.at(i));
-        if (parseDate(range.at(i)) === parseDate(today)){ //can probably get rid of the parseDate()s here
+        d[i] = parseDate(range.at(i)); 
+        if (parseDate(range.at(i)) === parseDate(today)){ 
           marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
         }
-      }      
+      }       
     
 
-      return (
+    //   <td class = "time">
+    //   <TimeRange 
+    //   onStartTimeChange = {this.returnFunctionStart}
+    //   onEndTimeChange = {this.returnFunctionEnd}
+    //   startMoment = {this.state.startTime}
+    //   endMoment = {this.state.endTime}
+    //   startLabel = ""
+    //   endLabel = " to "
+    //   showErrors = {true}/> 
+    //   </td>
+
+
+
+      return ( 
           <table>
           <tr>
             <td class = "arrow">{marker[0]}</td>
             <td class = "date">{d[0]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[1]}</td>
             <td class = "date">{d[1]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[2]}</td>
             <td class = "date">{d[2]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[3]}</td>
             <td class = "date">{d[3]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[4]}</td>
             <td class = "date">{d[4]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[5]}</td>
             <td class = "date">{d[5]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[6]}</td>
             <td class = "date">{d[6]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[7]}</td>
             <td class = "date">{d[7]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
            <td class = "arrow">{marker[8]}</td>
             <td class = "date">{d[8]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[9]}</td>
             <td class = "date">{d[9]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[10]}</td>
             <td class = "date">{d[10]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[11]}</td>
             <td class = "date">{d[11]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[12]}</td>
             <td class = "date">{d[12]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[13]}</td>
             <td class = "date">{d[13]}</td>
-            <td class = "time">{this.getTR()}</td>
+            <td class = "time"></td>
           </tr>
           </table>
       );

@@ -5,7 +5,7 @@ import HourInput from './HourInput.js'
 function App() {
   return (
     <div className="App">
-         <HourInput />
+        <HourInput />
     </div>
   );
 }
