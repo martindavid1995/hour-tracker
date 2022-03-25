@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import TimeRange from 'react-time-range'
-import TimeSelector from './TimeSelector'
+
 import moment from "moment";
 import DropDown from "./TimeSelector";
 
@@ -128,7 +128,7 @@ export default class HourInput extends React.Component {
           <tr>
             <td class = "arrow">{marker[0]}</td>
             <td class = "date">{d[0]}</td>
-            <td class = "time"><TimeSelector /></td>
+            <td class = "time"></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[1]}</td>
