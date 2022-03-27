@@ -1,8 +1,5 @@
 import React, { useState } from "react"
-import TimeRange from 'react-time-range'
-
-import moment from "moment";
-import DropDown from "./TimeSelector";
+import TimeSelector from "./TimeSelector";
 
 
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
@@ -16,7 +13,7 @@ Date.prototype.addDays = function (days){
    return date; 
 } 
 
-const today = new Date().addDays(0)
+const today = new Date().addDays(2)
 
 function parseDate(date){
     var fmt = "";
@@ -41,10 +38,7 @@ function generateRanges(){
 
     for (var i = 1; i <= 100; i++)
       ranges.push(getRange(getLastDate(ranges.at(i-1)))); 
-       
-    // for (var j = 0; j < ranges.length; j++)
-    //   console.log(makeRangeReadable(ranges.at(j)))
-    
+          
     return ranges;
 }
  
@@ -107,93 +101,79 @@ export default class HourInput extends React.Component {
         if (parseDate(range.at(i)) === parseDate(today)){ 
           marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
         }
-      }       
-    
-
-    //   <td class = "time">
-    //   <TimeRange 
-    //   onStartTimeChange = {this.returnFunctionStart}
-    //   onEndTimeChange = {this.returnFunctionEnd}
-    //   startMoment = {this.state.startTime}
-    //   endMoment = {this.state.endTime}
-    //   startLabel = ""
-    //   endLabel = " to "
-    //   showErrors = {true}/> 
-    //   </td>
-
-
-
+      }        
+      
       return ( 
           <table>
           <tr>
             <td class = "arrow">{marker[0]}</td>
             <td class = "date">{d[0]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[1]}</td>
             <td class = "date">{d[1]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[2]}</td>
             <td class = "date">{d[2]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[3]}</td>
             <td class = "date">{d[3]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[4]}</td>
             <td class = "date">{d[4]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[5]}</td>
             <td class = "date">{d[5]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[6]}</td>
             <td class = "date">{d[6]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[7]}</td>
             <td class = "date">{d[7]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
            <td class = "arrow">{marker[8]}</td>
             <td class = "date">{d[8]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[9]}</td>
             <td class = "date">{d[9]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[10]}</td>
             <td class = "date">{d[10]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[11]}</td>
             <td class = "date">{d[11]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[12]}</td>
             <td class = "date">{d[12]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[13]}</td>
             <td class = "date">{d[13]}</td>
-            <td class = "time"></td>
+            <td class = "time"><TimeSelector /></td>
           </tr>
           </table>
       );

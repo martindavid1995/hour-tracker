@@ -37,3 +37,14 @@ td.time{
   width: 76%;
   height: 20px;
 }
+td.drop{
+  border: 1px solid rgb(0, 0, 0);
+  width: 45%;
+  height: 20px;
+}
+td.to{
+  border: 1px solid rgb(0, 0, 0);
+  width: 50%;
+  height: 20px;
+}
+
