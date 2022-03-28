@@ -113,67 +113,67 @@ export default class HourInput extends React.Component {
           <tr>
             <td class = "arrow">{marker[1]}</td>
             <td class = "date">{d[1]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[2]}</td>
             <td class = "date">{d[2]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[3]}</td>
             <td class = "date">{d[3]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[4]}</td>
             <td class = "date">{d[4]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[5]}</td>
             <td class = "date">{d[5]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[6]}</td>
             <td class = "date">{d[6]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[7]}</td>
             <td class = "date">{d[7]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
            <td class = "arrow">{marker[8]}</td>
             <td class = "date">{d[8]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[9]}</td>
             <td class = "date">{d[9]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[10]}</td>
             <td class = "date">{d[10]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
-          <tr>
+          <tr> 
             <td class = "arrow">{marker[11]}</td>
             <td class = "date">{d[11]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[12]}</td>
             <td class = "date">{d[12]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           <tr>
             <td class = "arrow">{marker[13]}</td>
             <td class = "date">{d[13]}</td>
-            <td class = "time"><TimeSelector /></td>
+            {/* <td class = "time"><TimeSelector /></td> */}
           </tr>
           </table>
       );

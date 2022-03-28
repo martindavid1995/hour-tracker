@@ -14,37 +14,42 @@ code {
 
 table{
   table-layout: fixed;
-  width: 50%;
-  border: 1px solid rgb(233, 237, 41);
+  width: 48%;
+  /* border: 1px solid rgb(233, 237, 41); */
 }
 
 td{
-  border: 1px solid rgb(187, 144, 80);
+  /* border: 1px solid rgb(187, 144, 80); */
 }
 
 td.arrow{
-  border: 1px solid rgb(109, 184, 23);
+  /* border: 1px solid rgb(109, 184, 23); */
   width: 2%;
   height: 20px;
 }
 td.date{
-  border: 1px solid rgb(34, 55, 141);
+  /* border: 1px solid rgb(34, 55, 141); */
   width: 22%;
   height: 20px;
 }
 td.time{
-  border: 1px solid rgb(204, 26, 124);
+  /* border: 1px solid rgb(204, 26, 124); */
   width: 76%;
   height: 20px;
 }
 td.drop{
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 0, 0); */
   width: 45%;
   height: 20px;
 }
+table.drop{
+  table-layout: fixed;
+  width: 100%;
+  /* border: 1px solid rgb(233, 237, 41); */
+}
 td.to{
-  border: 1px solid rgb(0, 0, 0);
-  width: 50%;
+  /* border: 1px solid rgb(0, 0, 0); */
+  width: 20%;
   height: 20px;
 }
 
