@@ -93,6 +93,7 @@ export default class HourInput extends React.Component {
     }
     
     render() {
+      // console.log("Rendering in HourInput")
       const range = getRelevantRange();
       var d = new Array(range.length);
       var marker = new Array(range.length);
@@ -102,8 +103,9 @@ export default class HourInput extends React.Component {
           marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
         }
       }        
-      
+        
       return ( 
+        
           <table>
           <tr>
             <td class = "arrow">{marker[0]}</td>
