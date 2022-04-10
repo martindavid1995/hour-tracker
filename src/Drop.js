@@ -17,7 +17,7 @@ export class Drop extends React.Component {
          <Select
           placeholder=""
           onChange={(values) => this.send(this.props.name, values[0].label)}
-          values={[]} 
+          // values={} 
           options={this.props.options}
         />
       </div>

@@ -16,32 +16,32 @@ function getMomentRange(){
     var currTime = startTime.clone()
 
     while(getMinsLeft(currTime) > 0){
-      moments.push({label: currTime.format('LT'), value: currTime})
+      moments.push({label: currTime.format('LT'), value: JSON.stringify(currTime)})
       currTime = currTime.add(step, 'minutes')
     }   
-    moments.push({label: currTime.format('LT'), value: currTime})
+    moments.push({label: currTime.format('LT'), value: JSON.stringify(currTime)})
     return moments
 }
+   
 
 class TimeSelector extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             name: "default",
-            value: "default"
+            value: "default",
         } 
     }
  
-    getValue = (id, val) => {
-        // console.log("getValue() called with",id," ",val)
+    getValue = (name, val) => {
         let newState = this.state;
         newState = {
-            name: id,
-            value: val
+            name: name,
+            value: val,
         }
         this.setState(newState)
     }
-
+ 
     showMessage = () => {
         if(this.state)  {
             return(
@@ -50,24 +50,24 @@ class TimeSelector extends React.Component{
                 </div>
             )
         }
-        return false;
+        return false; 
     } 
 
     render = () => {
-        // console.log("Rendering in TimeSelector")
-        console.log("in TimeSelector, ",this.state.name, " holds the value ", this.state.value)
+        // console.log("in TimeSelector, ",this.state.name, " holds the value ", this.state.value, "from the TimeSelector ID=",this.props.id)
         return(
             <div>
                 <table class="drop">
                 <td class="drop"><Drop name='from' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>
                 <td class="to">to</td>   
                 <td class="drop"><Drop name='to' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>  
+                {/* <td>{this.props.id}</td> */}
                 </table>
                 {/* {this.showMessage()} */}
             </div>
         )
     }
-}
+} 
 
 export default TimeSelector;
  

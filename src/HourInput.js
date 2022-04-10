@@ -87,6 +87,7 @@ function getDates(anchor){
 
 
 export default class HourInput extends React.Component {
+    
 
     constructor(props) {
       super(props)
@@ -94,6 +95,7 @@ export default class HourInput extends React.Component {
     
     render() {
       // console.log("Rendering in HourInput")
+      // console.log(this.state.id)
       const range = getRelevantRange();
       var d = new Array(range.length);
       var marker = new Array(range.length);
@@ -110,74 +112,74 @@ export default class HourInput extends React.Component {
           <tr>
             <td class = "arrow">{marker[0]}</td>
             <td class = "date">{d[0]}</td>
-            <td class = "time"><TimeSelector /></td>
+            <td class = "time"><TimeSelector id={"01"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[1]}</td>
             <td class = "date">{d[1]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"02"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[2]}</td>
             <td class = "date">{d[2]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"03"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[3]}</td>
             <td class = "date">{d[3]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"04"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[4]}</td>
             <td class = "date">{d[4]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"05"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[5]}</td>
             <td class = "date">{d[5]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"06"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[6]}</td>
             <td class = "date">{d[6]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"07"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[7]}</td>
             <td class = "date">{d[7]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"08"}/></td>
           </tr>
           <tr>
-           <td class = "arrow">{marker[8]}</td>
+            <td class = "arrow">{marker[8]}</td>
             <td class = "date">{d[8]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"09"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[9]}</td>
             <td class = "date">{d[9]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"10"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[10]}</td>
             <td class = "date">{d[10]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"11"}/></td>
           </tr>
           <tr> 
             <td class = "arrow">{marker[11]}</td>
             <td class = "date">{d[11]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"12"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[12]}</td>
             <td class = "date">{d[12]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"13"}/></td>
           </tr>
           <tr>
             <td class = "arrow">{marker[13]}</td>
             <td class = "date">{d[13]}</td>
-            {/* <td class = "time"><TimeSelector /></td> */}
+            <td class = "time"><TimeSelector id={"14"}/></td>
           </tr>
           </table>
       );
     }
-  }
+  } 
