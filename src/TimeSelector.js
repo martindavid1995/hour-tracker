@@ -8,7 +8,7 @@ var step = 30
 
 function getMinsLeft(currTime) {
   var duration = moment.duration(endTime.diff(currTime))
-  return parseInt(duration.asMinutes())
+  return parseInt(duration.asMinutes(),10)
 }
 
 function getMomentRange(){ 
@@ -25,26 +25,30 @@ function getMomentRange(){
    
 
 function TimeSelector({id}) {
-   
-    function showMessage() { 
-        console.log(name," holds the value ", value.moment, " in ID =",id)
-    } 
-    
+       
     const [value, getValue] = useState("undef")
     const [name, setName] = useState("undef")
     
-    const gVal = (name, val) => {
+    const push = (name, val) => {
         setName(name)
         getValue(val)
     }
-      
+
+    function showMessage() { 
+        console.log(name," holds the value ", value.label, " in ID =",id)
+    } 
+       
     return( 
          
         <div>
-            <table class="drop">
-            <td class="drop"><Drop name='from' options={getMomentRange()} sendValue = {gVal}/></td>
-            <td class="to">to</td>   
-            <td class="drop"><Drop name='to' options={getMomentRange()} sendValue = {gVal}/></td>  
+            <table className="drop">
+                <tbody>
+                    <tr>
+                        <td className="drop"><Drop name='from' options={getMomentRange()} sendValue={push}/></td>
+                        <td className="to">to</td>   
+                        <td className="drop"><Drop name='to' options={getMomentRange()} sendValue={push}/></td>
+                    </tr>  
+                </tbody>
             </table>
             {showMessage()}
         </div>
@@ -52,10 +56,10 @@ function TimeSelector({id}) {
     
 } 
 
+ 
 
 
-
-// class TimeSelector extends React.Component{
+// className TimeSelector extends React.Component{
 //     constructor(props){
 //         super(props);
 //         this.state = {
@@ -88,10 +92,10 @@ function TimeSelector({id}) {
 //         console.log("in TimeSelector, ",this.state.name, " holds the value ", this.state.value, "from the TimeSelector ID =",this.props.id)
 //         return(
 //             <div>
-//                 <table class="drop">
-//                 <td class="drop"><Drop name='from' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>
-//                 <td class="to">to</td>   
-//                 <td class="drop"><Drop name='to' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>  
+//                 <table className="drop">
+//                 <td className="drop"><Drop name='from' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>
+//                 <td className="to">to</td>   
+//                 <td className="drop"><Drop name='to' options={getMomentRange()} sendValue={this.getValue.bind(this)}/></td>  
 //                 {/* <td>{this.props.id}</td> */}
 //                 </table>
 //                 {/* {this.showMessage()} */}

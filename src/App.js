@@ -6,8 +6,6 @@ import HourInput from './HourInput.js';
 function App() {
   return (
     <div className="App">
-
-      {/* <Container></Container> */}
       <HourInput />
     </div>
   );

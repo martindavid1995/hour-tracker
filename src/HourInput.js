@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import TimeSelector from "./TimeSelector";
 
 
@@ -7,13 +7,13 @@ const anchorDay = "Sat";
 const lengthOfPayPeriod = 14; 
  
  
-Date.prototype.addDays = function (days){
-   const date = new Date(this.valueOf());
+function addDays (today, days){
+   const date = new Date(today);
    date.setDate(date.getDate() + days);
    return date; 
 } 
 
-const today = new Date().addDays(0)
+const today = new Date()
 
 function parseDate(date){
     var fmt = "";
@@ -21,7 +21,7 @@ function parseDate(date){
     fmt += spl[0] + " " + spl[1] + " " + spl[2];
     return fmt;
 }
-
+ 
 function makeRangeReadable(range){
   return (parseDate(range[0]) + " to " + parseDate(range[range.length - 1]) + "\n")
 }
@@ -31,7 +31,7 @@ function getLastDate(range){
 }
 
 function generateRanges(){
-    var ranges = new Array(); //We are going to hold 100 ranges
+    var ranges = [] //We are going to hold 100 ranges
       
     var currRange = getRange(anchorDate);
     ranges.push(currRange);    
@@ -65,7 +65,7 @@ function getRange(startDate) {
   var dates = new Array(lengthOfPayPeriod);
 
   for (var i = 0; i < dates.length; i++){
-    dates[i] = startDate.addDays(i + 1);
+    dates[i] = addDays(startDate, (i + 1));
   }
 
   return dates;
@@ -97,76 +97,78 @@ function HourInput(){
       
     return ( 
         <table>
-        <tr>
-          <td class = "arrow">{marker[0]}</td>
-          <td class = "date">{d[0]}</td>
-          <td class = "time"><TimeSelector id={"01"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[1]}</td>
-          <td class = "date">{d[1]}</td>
-          <td class = "time"><TimeSelector id={"02"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[2]}</td>
-          <td class = "date">{d[2]}</td>
-          <td class = "time"><TimeSelector id={"03"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[3]}</td>
-          <td class = "date">{d[3]}</td>
-          <td class = "time"><TimeSelector id={"04"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[4]}</td>
-          <td class = "date">{d[4]}</td>
-          <td class = "time"><TimeSelector id={"05"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[5]}</td>
-          <td class = "date">{d[5]}</td>
-          <td class = "time"><TimeSelector id={"06"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[6]}</td>
-          <td class = "date">{d[6]}</td>
-          <td class = "time"><TimeSelector id={"07"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[7]}</td>
-          <td class = "date">{d[7]}</td>
-          <td class = "time"><TimeSelector id={"08"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[8]}</td>
-          <td class = "date">{d[8]}</td>
-          <td class = "time"><TimeSelector id={"09"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[9]}</td>
-          <td class = "date">{d[9]}</td>
-          <td class = "time"><TimeSelector id={"10"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[10]}</td>
-          <td class = "date">{d[10]}</td>
-          <td class = "time"><TimeSelector id={"11"}/></td>
-        </tr>
-        <tr> 
-          <td class = "arrow">{marker[11]}</td>
-          <td class = "date">{d[11]}</td>
-          <td class = "time"><TimeSelector id={"12"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[12]}</td>
-          <td class = "date">{d[12]}</td>
-          <td class = "time"><TimeSelector id={"13"}/></td>
-        </tr>
-        <tr>
-          <td class = "arrow">{marker[13]}</td>
-          <td class = "date">{d[13]}</td>
-          <td class = "time"><TimeSelector id={"14"}/></td>
-        </tr>
+          <tbody>
+            <tr>
+              <td className="arrow">{marker[0]}</td>
+              <td className="date">{d[0]}</td>
+              <td className="time"><TimeSelector id={"01"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[1]}</td>
+              <td className="date">{d[1]}</td>
+              <td className="time"><TimeSelector id={"02"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[2]}</td>
+              <td className="date">{d[2]}</td>
+              <td className="time"><TimeSelector id={"03"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[3]}</td>
+              <td className="date">{d[3]}</td>
+              <td className="time"><TimeSelector id={"04"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[4]}</td>
+              <td className="date">{d[4]}</td>
+              <td className="time"><TimeSelector id={"05"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[5]}</td>
+              <td className="date">{d[5]}</td>
+              <td className="time"><TimeSelector id={"06"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[6]}</td>
+              <td className="date">{d[6]}</td>
+              <td className="time"><TimeSelector id={"07"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[7]}</td>
+              <td className="date">{d[7]}</td>
+              <td className="time"><TimeSelector id={"08"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[8]}</td>
+              <td className="date">{d[8]}</td>
+              <td className="time"><TimeSelector id={"09"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[9]}</td>
+              <td className="date">{d[9]}</td>
+              <td className="time"><TimeSelector id={"10"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[10]}</td>
+              <td className="date">{d[10]}</td>
+              <td className="time"><TimeSelector id={"11"}/></td>
+            </tr>
+            <tr> 
+              <td className="arrow">{marker[11]}</td>
+              <td className="date">{d[11]}</td>
+              <td className="time"><TimeSelector id={"12"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[12]}</td>
+              <td className="date">{d[12]}</td>
+              <td className="time"><TimeSelector id={"13"}/></td>
+            </tr>
+            <tr>
+              <td className="arrow">{marker[13]}</td>
+              <td className="date">{d[13]}</td>
+              <td className="time"><TimeSelector id={"14"}/></td>
+            </tr> 
+          </tbody>
         </table> 
     );
 }
