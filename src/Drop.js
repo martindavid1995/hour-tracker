@@ -9,7 +9,7 @@ function Drop ({name, options, sendValue}){
       <div>
          <Select
           placeholder=""
-          onChange={(values) => sendValue(name, values[0])}
+          onChange={(values) => sendValue(values[0], name)}
           options={options}
         />
       </div>
