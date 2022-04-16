@@ -23,37 +23,42 @@ function getMomentRange(){
     return moments
 }
    
-function TimeSelector({id}) {
-
+function TimeSelector({id, sendDiff}) {
     const [fromValue, getFromValue] = useState("undef")
     const [toValue, getToValue] = useState("undef")
+    const [diff, setDiff] = useState(null)
     
     const push = (val, name) => {
         if (name === '0')
             getFromValue(val)
         else
-            getToValue(val)          
-    } 
-   
-    function showMessage() { 
-        console.log(fromValue.label," -> ", toValue.label, " in ID =",id)
+            getToValue(val) 
+        
+        setDiff(getDifference())
     } 
 
+    // https://gist.github.com/bpas247/e177a772b293025e5324219d231cf32c
+    // https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior/#render-batching-and-timing
+    // https://www.sitepoint.com/implement-memoization-in-react-to-improve-performance/#:~:text=In%20the%20context%20of%20a,will%20return%20the%20cached%20result.
+    // https://epicreact.dev/memoization-and-react/
+    
+
+    function showValues() { 
+        console.log("[",id,"]: ",fromValue.label," -> ", toValue.label," diff = ",diff)
+    } 
+    
     function getDifference(){
         if (fromValue === "undef" || toValue === "undef"){
-            return 
+            return null
         } 
-         
     
         if (toValue.moment.isBefore(fromValue.moment))
-            return "X"
+            return 'X'
         
         return toValue.moment.diff(fromValue.moment, 'hours', true)
-        
     }
        
-    return( 
-         
+    return(     
         <div>
             <table className="drop">
                 <tbody>
@@ -65,7 +70,7 @@ function TimeSelector({id}) {
                     </tr>  
                 </tbody>
             </table>
-            {showMessage()}
+            {showValues()}
         </div>
     )
     

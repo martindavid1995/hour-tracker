@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import TimeSelector from "./TimeSelector";
 
 
@@ -85,6 +85,7 @@ function getDates(anchor){
 }
 
 function HourInput(){
+
     const range = getRelevantRange();
     var d = new Array(range.length);
     var marker = new Array(range.length);
@@ -94,14 +95,23 @@ function HourInput(){
         marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
       }
     }        
-      
+    // console.log(hoursWorked)
+    // 
+
+    const [hoursWorked, updateHours] = useState(0)
+
+    const pushHours = (diff) => {
+        console.log()
+        updateHours(hoursWorked + diff)
+    }
+  
     return ( 
         <table>
           <tbody>
             <tr>
               <td className="arrow">{marker[0]}</td>
               <td className="date">{d[0]}</td>
-              <td className="time"><TimeSelector id={"01"}/></td>
+              <td className="time"><TimeSelector id={"01"} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[1]}</td>
