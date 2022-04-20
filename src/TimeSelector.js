@@ -2,14 +2,6 @@ import React, { useState } from 'react'
 import Drop  from './Drop';
 import moment from 'moment';
 
-// https://gist.github.com/bpas247/e177a772b293025e5324219d231cf32c
-// https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior/#render-batching-and-timing
-// https://www.sitepoint.com/implement-memoization-in-react-to-improve-performance/#:~:text=In%20the%20context%20of%20a,will%20return%20the%20cached%20result.
-// https://epicreact.dev/memoization-and-react/
-
-
-
-
 const startTime = moment('06:00 am', 'hh:mm a');
 const endTime = moment('09:00 pm', 'hh:mm a')
 var step = 30
@@ -48,8 +40,6 @@ function TimeSelector({id, sendDiff}) {
     } 
     
     function getDifference(){
-        
-
         if (fromValue === "undef" || toValue === "undef"){
             return null
         } 
@@ -73,18 +63,9 @@ function TimeSelector({id, sendDiff}) {
                 </tbody>
             </table>
             {sendDiff(diff, id)}
-            {/* {showValues()} */}
         </div>
     )
     
 } 
 
 export default TimeSelector;
-
-
- 
-
-
-// useEffect(() => {
-//     console.log(diff)
-// },[fromValue, toValue, diff])
