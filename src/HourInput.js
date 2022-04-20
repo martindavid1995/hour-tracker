@@ -95,91 +95,104 @@ function HourInput(){
         marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
       }
     }        
-    // console.log(hoursWorked)
-    // 
 
-    const [hoursWorked, updateHours] = useState(0)
 
-    const pushHours = (diff) => {
-        console.log()
-        updateHours(hoursWorked + diff)
-    }
+    const diffs = Array(14)
+    const [hoursWorked, setHoursWorked] = useState(0)
+
+    const pushHours = (diff, idx) => {
+        if (diff !== null && diff !== 'X'){
+            diffs[idx] = diff  
+        } else {
+            diffs[idx] = 0
+        }
+        setHoursWorked(diffs.reduce((a,b) => a + b, 0))
+    } 
   
     return ( 
+      <div>
         <table>
           <tbody>
             <tr>
               <td className="arrow">{marker[0]}</td>
               <td className="date">{d[0]}</td>
-              <td className="time"><TimeSelector id={"01"} sendDiff={pushHours}/></td>
+              <td className="time"><TimeSelector id={0} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[1]}</td>
               <td className="date">{d[1]}</td>
-              <td className="time"><TimeSelector id={"02"}/></td>
+              <td className="time"><TimeSelector id={1} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[2]}</td>
               <td className="date">{d[2]}</td>
-              <td className="time"><TimeSelector id={"03"}/></td>
+              <td className="time"><TimeSelector id={2} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[3]}</td>
               <td className="date">{d[3]}</td>
-              <td className="time"><TimeSelector id={"04"}/></td>
+              <td className="time"><TimeSelector id={3} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[4]}</td>
               <td className="date">{d[4]}</td>
-              <td className="time"><TimeSelector id={"05"}/></td>
+              <td className="time"><TimeSelector id={4} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[5]}</td>
               <td className="date">{d[5]}</td>
-              <td className="time"><TimeSelector id={"06"}/></td>
+              <td className="time"><TimeSelector id={5} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[6]}</td>
               <td className="date">{d[6]}</td>
-              <td className="time"><TimeSelector id={"07"}/></td>
+              <td className="time"><TimeSelector id={6} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[7]}</td>
               <td className="date">{d[7]}</td>
-              <td className="time"><TimeSelector id={"08"}/></td>
+              <td className="time"><TimeSelector id={7} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[8]}</td>
               <td className="date">{d[8]}</td>
-              <td className="time"><TimeSelector id={"09"}/></td>
+              <td className="time"><TimeSelector id={8} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[9]}</td>
               <td className="date">{d[9]}</td>
-              <td className="time"><TimeSelector id={"10"}/></td>
+              <td className="time"><TimeSelector id={9} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[10]}</td>
               <td className="date">{d[10]}</td>
-              <td className="time"><TimeSelector id={"11"}/></td>
+              <td className="time"><TimeSelector id={10} sendDiff={pushHours}/></td>
             </tr>
             <tr> 
               <td className="arrow">{marker[11]}</td>
               <td className="date">{d[11]}</td>
-              <td className="time"><TimeSelector id={"12"}/></td>
+              <td className="time"><TimeSelector id={11} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[12]}</td>
               <td className="date">{d[12]}</td>
-              <td className="time"><TimeSelector id={"13"}/></td>
+              <td className="time"><TimeSelector id={12} sendDiff={pushHours}/></td>
             </tr>
             <tr>
               <td className="arrow">{marker[13]}</td>
               <td className="date">{d[13]}</td>
-              <td className="time"><TimeSelector id={"14"}/></td>
-            </tr> 
+              <td className="time"><TimeSelector id={13} sendDiff={pushHours}/></td>
+            </tr>
+            <tr>
+              <td>
+                Total hours worked: {hoursWorked}
+              </td>
+            </tr>
           </tbody>
-        </table> 
+         
+        </table>   
+      </div>
+        
     );
 }
 
