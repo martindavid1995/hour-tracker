@@ -52,9 +52,9 @@ function TimeSelector({id, sendDiff}) {
        
     return(     
         <div>
-            <table className="drop">
+            <table>
                 <tbody>
-                    <tr>
+                    <tr className="center">
                         <td className="drop"><Drop name='0' options={getMomentRange()} sendValue={handleClick} /></td>
                         <td className="to">to</td>   
                         <td className="drop"><Drop name='1' options={getMomentRange()} sendValue={handleClick}/></td>

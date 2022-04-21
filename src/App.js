@@ -1,14 +1,22 @@
 import './App.css';
 import React from 'react';
-import HourInput from './HourInput.js';
-
+import PayPeriodList from './PayPeriodList.js';
+import HourInput from './HourInput';
 
 function App() {
   return (
-    <div className="App">
-      <HourInput />
+    <div class="center">
+      <table className="container" class="center">
+        <tbody>
+        <tr> 
+          <td class="center"><PayPeriodList /></td>
+          <td class="center"><HourInput /></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
 
 export default App;
+ 
