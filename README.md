@@ -2,6 +2,4 @@
 Webapp designed to make calculating work hours easier.
 More detailed description to come.
 
-Okay. Change, change change
-Another change here
-okay lets try this again
+I'm going to try rebasing instead
