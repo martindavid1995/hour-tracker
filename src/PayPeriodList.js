@@ -53,7 +53,7 @@ function getRelevantRange(){
        }
      } 
   }
-  console.log("Didn't find a valid range for today")
+  console.log("Didn't find a valid range for today.")
 }
 
 // Gets a range of dates in standard "Date" format
