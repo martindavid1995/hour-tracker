@@ -79,9 +79,9 @@ function formatRange(range){
   return dates;
 }
 
-// function getDates(anchor){
-//   return formatRange(getRange(anchor))
-// }
+function getDates(anchor){
+  return formatRange(getRange(anchor))
+}
 
 function getPayPeriodRange(n){
   var result = []
@@ -99,7 +99,7 @@ function PayPeriodList(){
     for (var i = 0; i < range.length; i++){
       d[i] = parseDate(range.at(i)); 
       if (parseDate(range.at(i)) === parseDate(today)){ 
-        marker[i] = ">"; //maybe go backwards here and tag all of the ones before it
+        marker[i] = ">"; //maybe go backwards here and tag all of the ones before it  
       }
     }        
 
