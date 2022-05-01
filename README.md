@@ -1,3 +1,2 @@
 ## Hour-Tracker
-state
-I am on master
+Beginnings for hour-tracker. More detailed description to come
