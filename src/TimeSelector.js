@@ -17,10 +17,10 @@ function getMomentRange(){
     var currTime = startTime.clone()
 
     while(getMinsLeft(currTime) > 0){
-      moments.push({label: currTime.format('LT'), value: JSON.stringify(currTime), moment: currTime.clone()})
+      moments.push({label: currTime.format('LT'), moment: currTime.clone()})
       currTime = currTime.add(step, 'minutes')
     }   
-    moments.push({label: currTime.format('LT'), value: JSON.stringify(currTime), moment: currTime.clone()})
+    moments.push({label: currTime.format('LT'), moment: currTime.clone()})
     return moments
 }
    
@@ -54,13 +54,17 @@ function TimeSelector({id, sendDiff, label}) {
        
     return(     
         <div>
-            <tr>
-                <td className='fit'>{label}</td>
-                <td><Drop name='0' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
-                <td>to</td>   
-                <td><Drop name='1' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
-                <td className='fit'>{getDifference()}</td>
-            </tr> 
+            <table>
+                <tbody>
+                <tr>
+                    <td className='fit'>{label}</td>
+                    <td><Drop name='0' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                    <td>to</td>   
+                    <td><Drop name='1' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                    <td className='fit'>{getDifference()}</td>
+                </tr> 
+                </tbody>
+            </table>
             {sendDiff(diff, id)}
         </div>
     )

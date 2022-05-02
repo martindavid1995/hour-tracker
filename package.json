@@ -21,6 +21,7 @@
     "react-select": "^5.2.2",
     "react-time-picker": "^4.5.0",
     "react-time-range": "^1.0.4",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
