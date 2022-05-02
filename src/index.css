@@ -34,3 +34,7 @@ tr {
   border: 2px solid #20d66c;
   padding: 5px;
 }
+
+.input {
+  width: 30px
+}

@@ -6,7 +6,6 @@ import { useState } from "react"
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
 const anchorDay = "Sat";
 const lengthOfPayPeriod = 14; 
-const requiredHours = 10;
  
 function addDays (today, days){
    const date = new Date(today);
@@ -99,7 +98,7 @@ function getResultString(hoursWorked, hoursReqd){
   if (diff > 0)
     return "You are under "+diff+" hours " + String.fromCodePoint(0x1F612)
   else if (diff < 0)
-    return "You are over "+-diff+" hours" + String.fromCodePoint(0x1F604)
+    return "You are over "+-diff+" hours " + String.fromCodePoint(0x1F604)
   else
     return "Your hours are perfect " + String.fromCodePoint(0x2705)
 }
@@ -108,7 +107,7 @@ function getResultString(hoursWorked, hoursReqd){
 function HourInput () {
     const diffs = Array(14)
     const [hoursWorked, setHoursWorked] = useState(0)
-    const [hoursReqd, setHoursReqd] = useState(0)
+    const [hoursReqd, setHoursReqd] = useState(85)
     
 
     const pushHours = (diff, idx) => {
@@ -129,6 +128,25 @@ function HourInput () {
     
     return ( 
         <div>
+          <table>
+            <tbody>
+              <tr>
+                
+                <td>
+                  {"Total Hours Needed ".padEnd(50," ")}
+                  <input
+                    className="input"
+                    type="text"
+                    pattern="[0-9]*"
+                    value={hoursReqd}
+                    onChange={(e) => 
+                      setHoursReqd((v) => (e.target.validity.valid ? e.target.value : v))
+                    } /> 
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <table>
             <tbody>
               {
@@ -158,11 +176,3 @@ function HourInput () {
 }
 
 export default HourInput
-
-/* <input
-  type="text"
-  pattern="[0-9]*"
-  value={hoursReqd}
-  onChange={(e) => 
-    setHoursReqd((v) => (e.target.validity.valid ? e.target.value : v))
-  } /> */
