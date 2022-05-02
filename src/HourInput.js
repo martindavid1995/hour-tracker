@@ -96,7 +96,7 @@ function getPayPeriodRange(n){
 function getResultString(hoursWorked, hoursReqd){
   const diff = hoursReqd-hoursWorked
   if (diff > 0)
-    return "You are under "+diff+" hours " + String.fromCodePoint(0x1F612)
+    return "You are short "+diff+" hours " + String.fromCodePoint(0x1F612)
   else if (diff < 0)
     return "You are over "+-diff+" hours " + String.fromCodePoint(0x1F604)
   else
@@ -131,9 +131,8 @@ function HourInput () {
           <table>
             <tbody>
               <tr>
-                
                 <td>
-                  {"Total Hours Needed ".padEnd(50," ")}
+                  Hours required per period {    }
                   <input
                     className="input"
                     type="text"
