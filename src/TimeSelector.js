@@ -5,6 +5,7 @@ import moment from 'moment';
 const startTime = moment('06:00 am', 'hh:mm a');
 const endTime = moment('09:00 pm', 'hh:mm a')
 var step = 30
+const today = new Date()
 
 function getMinsLeft(currTime) {
   var duration = moment.duration(endTime.diff(currTime))
@@ -23,7 +24,8 @@ function getMomentRange(){
     return moments
 }
    
-function TimeSelector({id, sendDiff}) {
+function TimeSelector({id, sendDiff, label}) {
+    // fromValue, toValue are moments
     const [fromValue, getFromValue] = useState("undef")
     const [toValue, getToValue] = useState("undef")
     const diff = getDifference()
@@ -52,16 +54,13 @@ function TimeSelector({id, sendDiff}) {
        
     return(     
         <div>
-            <table>
-                <tbody>
-                    <tr className="center">
-                        <td className="drop"><Drop name='0' options={getMomentRange()} sendValue={handleClick} /></td>
-                        <td className="to">to</td>   
-                        <td className="drop"><Drop name='1' options={getMomentRange()} sendValue={handleClick}/></td>
-                        <td className="valBox">{getDifference()}</td>
-                    </tr>  
-                </tbody>
-            </table>
+            <tr>
+                <td className='fit'>{label}</td>
+                <td><Drop name='0' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                <td>to</td>   
+                <td><Drop name='1' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                <td className='fit'>{getDifference()}</td>
+            </tr> 
             {sendDiff(diff, id)}
         </div>
     )

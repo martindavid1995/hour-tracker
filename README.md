@@ -1,5 +1,4 @@
 ## Hour-Tracker
-Beginnings for hour-tracker. More detailed description to come
-testing to see if we are still good
+Beginnings for hour-tracker. More detailed description to come.
 
-lets try it one more time
+This is my first JavaScript/React project so I imagine its gonna be ugly for a while.
