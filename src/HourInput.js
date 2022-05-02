@@ -93,8 +93,9 @@ function getPayPeriodRange(n){
 }
 
 
+
 function getResultString(hoursWorked, hoursReqd){
-  const diff = hoursReqd-hoursWorked
+  const diff = hoursReqd-(hoursWorked)
   if (diff > 0)
     return "You are short "+diff+" hours " + String.fromCodePoint(0x1F612)
   else if (diff < 0)
@@ -104,12 +105,95 @@ function getResultString(hoursWorked, hoursReqd){
 }
 
 
+
+
+// const selectors = [
+//   { 
+//     id: 0,
+//     name: "first",
+//     label: parseDate(range[0])
+//   },
+//   {
+//     id: 1,
+//     name: "second",
+//     label: parseDate(range[1])
+//   },
+//   {
+//     id: 2,
+//     name: "third",
+//     label: parseDate(range[2])
+//   },
+//   {
+//     id: 3,
+//     name: "fourth",
+//     label: parseDate(range[3])
+//   }
+// ]
+
+
 function HourInput () {
     const diffs = Array(14)
     const [hoursWorked, setHoursWorked] = useState(0)
     const [hoursReqd, setHoursReqd] = useState(85)
-    
-
+    const range = getRelevantRange();
+    const selectors = [
+      {
+        id: "01",
+        label:parseDate(range[0])
+      },
+      {
+        id: "02",
+        label:parseDate(range[1])
+      },
+      {
+        id: "03",
+        label:parseDate(range[2])
+      },
+      {
+        id: "04",
+        label:parseDate(range[3])
+      },
+      {
+        id: "05",
+        label:parseDate(range[4])
+      },
+      {
+        id: "06",
+        label:parseDate(range[5])
+      },
+      {
+        id: "07",
+        label:parseDate(range[6])
+      },
+      {
+        id: "08",
+        label:parseDate(range[7])
+      },
+      {
+        id: "09",
+        label:parseDate(range[8])
+      },
+      {
+        id: "10",
+        label:parseDate(range[9])
+      },
+      {
+        id: "11",
+        label:parseDate(range[10])
+      },
+      {
+        id: "12",
+        label:parseDate(range[11])
+      },
+      {
+        id: "13",
+        label:parseDate(range[12])
+      },
+      {
+        id: "14",
+        label:parseDate(range[13])
+      }
+    ]
     const pushHours = (diff, idx) => {
         if (diff !== null && diff !== 'X'){
             diffs[idx] = diff  
@@ -121,10 +205,7 @@ function HourInput () {
           setHoursWorked(diffs.reduce((a,b) => a + b, 0))
         })
         
-    } 
-
-    const keys = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
-    const range = getRelevantRange();
+    }     
     
     return ( 
         <div>
@@ -132,7 +213,7 @@ function HourInput () {
             <tbody>
               <tr>
                 <td>
-                  Hours required per period {    }
+                  Hours required per period {     }
                   <input
                     className="input"
                     type="text"
@@ -149,11 +230,16 @@ function HourInput () {
           <table>
             <tbody>
               {
-                keys.map((index) => {
+                selectors.map((selector,index) => {
                   return (
-                    <tr>
-                      <td><TimeSelector key={JSON.stringify(range[index])} id={index} sendDiff={pushHours} label={parseDate(range[index])}/></td>
-                    </tr>
+
+                   <div key={selector.id + index}>
+                     <tr>
+                       <td>
+                         <TimeSelector id={selector.id} sendDiff={pushHours} label={selector.label}/>
+                       </td>
+                     </tr>
+                   </div>              
                   )
                 })   
               }
@@ -161,7 +247,7 @@ function HourInput () {
                 <td>You have worked a total of {hoursWorked} hours this pay-period</td>
               </tr>
               <tr>
-                {getResultString(hoursWorked, hoursReqd)}
+                <td>{getResultString(hoursWorked, hoursReqd)}</td>
               </tr>
             </tbody>
           </table>
@@ -175,3 +261,9 @@ function HourInput () {
 }
 
 export default HourInput
+
+
+// <tr>
+// <td><TimeSelector key={selector.name+"-"+index} id={selector.id} sendDiff={pushHours} label={selector.label}/></td>
+// {/* {index} */}
+// </tr>
