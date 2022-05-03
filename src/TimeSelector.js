@@ -23,6 +23,14 @@ function getMomentRange(){
     moments.push({label: currTime.format('LT'), key:JSON.stringify(currTime), value: currTime.clone()})
     return moments
 }
+
+function parseDiff(diff){
+    if (diff != null && diff != 'X'){
+        return diff
+    }else if (diff != null){
+        return String.fromCodePoint(0x274c)
+    }
+}
    
 function TimeSelector({id, sendDiff, label}) {
     // fromValue, toValue are moments
@@ -52,6 +60,8 @@ function TimeSelector({id, sendDiff, label}) {
         
         return toValue.value.diff(fromValue.value, 'hours', true)
     }
+
+    
        
     return(     
         <div>
@@ -62,7 +72,7 @@ function TimeSelector({id, sendDiff, label}) {
                     <td><Drop name='0' options={opts} sendValue={handleClick} isDisabled={false}/></td>
                     <td>to</td>   
                     <td><Drop name='1' options={opts} sendValue={handleClick} isDisabled={false}/></td>
-                    <td className='fit'>{getDifference()}</td>
+                    <td className='fit'>{parseDiff(diff)}</td>
                 </tr> 
                 </tbody>
             </table>
