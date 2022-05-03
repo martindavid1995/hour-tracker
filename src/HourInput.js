@@ -3,6 +3,7 @@ import TimeSelector from "./TimeSelector"
 import { useState } from "react"
 
 
+
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
 const anchorDay = "Sat";
 const lengthOfPayPeriod = 14; 
@@ -94,6 +95,7 @@ function getPayPeriodRange(n){
 
 
 
+
 function getResultString(hoursWorked, hoursReqd){
   const diff = hoursReqd-(hoursWorked)
   if (diff > 0)
@@ -104,107 +106,33 @@ function getResultString(hoursWorked, hoursReqd){
     return "Your hours are perfect " + String.fromCodePoint(0x2705)
 }
 
+const selectors = genSelectors()
 
-
-
-// const selectors = [
-//   { 
-//     id: 0,
-//     name: "first",
-//     label: parseDate(range[0])
-//   },
-//   {
-//     id: 1,
-//     name: "second",
-//     label: parseDate(range[1])
-//   },
-//   {
-//     id: 2,
-//     name: "third",
-//     label: parseDate(range[2])
-//   },
-//   {
-//     id: 3,
-//     name: "fourth",
-//     label: parseDate(range[3])
-//   }
-// ]
-
+function genSelectors () {
+  const rng = getRelevantRange()
+  var selectors = []
+  for (var i = 0; i < lengthOfPayPeriod; i++){
+   
+    selectors[i] = {
+      id: i,
+      label: parseDate(rng[i])
+    }
+  }
+  return selectors
+}
 
 function HourInput () {
-    const diffs = Array(14)
+    const diffs = new Array(lengthOfPayPeriod).fill(0)
     const [hoursWorked, setHoursWorked] = useState(0)
     const [hoursReqd, setHoursReqd] = useState(85)
-    const range = getRelevantRange();
-    const selectors = [
-      {
-        id: "01",
-        label:parseDate(range[0])
-      },
-      {
-        id: "02",
-        label:parseDate(range[1])
-      },
-      {
-        id: "03",
-        label:parseDate(range[2])
-      },
-      {
-        id: "04",
-        label:parseDate(range[3])
-      },
-      {
-        id: "05",
-        label:parseDate(range[4])
-      },
-      {
-        id: "06",
-        label:parseDate(range[5])
-      },
-      {
-        id: "07",
-        label:parseDate(range[6])
-      },
-      {
-        id: "08",
-        label:parseDate(range[7])
-      },
-      {
-        id: "09",
-        label:parseDate(range[8])
-      },
-      {
-        id: "10",
-        label:parseDate(range[9])
-      },
-      {
-        id: "11",
-        label:parseDate(range[10])
-      },
-      {
-        id: "12",
-        label:parseDate(range[11])
-      },
-      {
-        id: "13",
-        label:parseDate(range[12])
-      },
-      {
-        id: "14",
-        label:parseDate(range[13])
-      }
-    ]
+
     const pushHours = (diff, idx) => {
         if (diff !== null && diff !== 'X'){
             diffs[idx] = diff  
-        } else {
-            diffs[idx] = 0
         }
-        console.log()
         useEffect(() => {
           setHoursWorked(diffs.reduce((a,b) => a + b, 0))
-        })
-        
+        })   
     }     
     
     return ( 
@@ -231,15 +159,12 @@ function HourInput () {
             <tbody>
               {
                 selectors.map((selector,index) => {
-                  return (
-
-                   <div key={selector.id + index}>
-                     <tr>
+                  return (             
+                     <tr key={selector.id +":"+ index}>
                        <td>
                          <TimeSelector id={selector.id} sendDiff={pushHours} label={selector.label}/>
                        </td>
-                     </tr>
-                   </div>              
+                     </tr>               
                   )
                 })   
               }

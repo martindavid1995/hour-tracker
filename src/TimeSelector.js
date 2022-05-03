@@ -17,10 +17,10 @@ function getMomentRange(){
     var currTime = startTime.clone()
 
     while(getMinsLeft(currTime) > 0){
-      moments.push({label: currTime.format('LT'), moment: currTime.clone()})
+      moments.push({label: currTime.format('LT'), key:JSON.stringify(currTime), value: currTime.clone()})
       currTime = currTime.add(step, 'minutes')
     }   
-    moments.push({label: currTime.format('LT'), moment: currTime.clone()})
+    moments.push({label: currTime.format('LT'), key:JSON.stringify(currTime), value: currTime.clone()})
     return moments
 }
    
@@ -29,6 +29,7 @@ function TimeSelector({id, sendDiff, label}) {
     const [fromValue, getFromValue] = useState("undef")
     const [toValue, getToValue] = useState("undef")
     const diff = getDifference()
+    const opts = getMomentRange()
 
     const handleClick = (val, name) => {
         if (name === '0')
@@ -46,10 +47,10 @@ function TimeSelector({id, sendDiff, label}) {
             return null
         } 
     
-        if (toValue.moment.isBefore(fromValue.moment))
+        if (toValue.value.isBefore(fromValue.value))
             return 'X'
         
-        return toValue.moment.diff(fromValue.moment, 'hours', true)
+        return toValue.value.diff(fromValue.value, 'hours', true)
     }
        
     return(     
@@ -58,9 +59,9 @@ function TimeSelector({id, sendDiff, label}) {
                 <tbody>
                 <tr>
                     <td className='fit'>{label}</td>
-                    <td><Drop name='0' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                    <td><Drop name='0' options={opts} sendValue={handleClick} isDisabled={false}/></td>
                     <td>to</td>   
-                    <td><Drop name='1' options={getMomentRange()} sendValue={handleClick} isDisabled={false}/></td>
+                    <td><Drop name='1' options={opts} sendValue={handleClick} isDisabled={false}/></td>
                     <td className='fit'>{getDifference()}</td>
                 </tr> 
                 </tbody>
