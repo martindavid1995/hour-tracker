@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import Drop  from './Drop';
 import moment from 'moment';
 
+
 const startTime = moment('06:00 am', 'hh:mm a');
 const endTime = moment('09:00 pm', 'hh:mm a')
 var step = 30
-const today = new Date()
+
 
 function getMinsLeft(currTime) {
   var duration = moment.duration(endTime.diff(currTime))
@@ -17,15 +18,15 @@ function getMomentRange(){
     var currTime = startTime.clone()
 
     while(getMinsLeft(currTime) > 0){
-      moments.push({label: currTime.format('LT'), key:JSON.stringify(currTime), value: currTime.clone()})
+      moments.push({label: currTime.format('LT'), value: currTime.clone()})
       currTime = currTime.add(step, 'minutes')
     }   
-    moments.push({label: currTime.format('LT'), key:JSON.stringify(currTime), value: currTime.clone()})
+    moments.push({label: currTime.format('LT'), value: currTime.clone()})
     return moments
 }
 
 function parseDiff(diff){
-    if (diff != null && diff != 'X'){
+    if (diff !== null && diff !== 'X'){
         return diff
     }else if (diff != null){
         return String.fromCodePoint(0x274c)
@@ -45,10 +46,6 @@ function TimeSelector({id, sendDiff, label}) {
         else
             getToValue(val)
     }
-
-    function showValues() { 
-        console.log("[",id,"]: ",fromValue.label," -> ", toValue.label," diff = ", diff)
-    } 
     
     function getDifference(){
         if (fromValue === "undef" || toValue === "undef"){
@@ -61,8 +58,6 @@ function TimeSelector({id, sendDiff, label}) {
         return toValue.value.diff(fromValue.value, 'hours', true)
     }
 
-    
-       
     return(     
         <div>
             <table>
