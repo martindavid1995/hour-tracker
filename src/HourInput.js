@@ -67,26 +67,6 @@ function getRange(startDate) {
 
   return dates;
 }
-// Format a range into displayable format
-// function formatRange(range){
-//   var dates = new Array(range.length)
-//   for (var i = 0; i < range.length; i++){
-//     dates[i] = parseDate(range[i]);
-//   }
-//   return dates;
-// }
-
-// function getDates(anchor){
-//   return formatRange(getRange(anchor))
-// }
-
-// function getPayPeriodRange(n){
-//   var result = []
-//   for (var i = 0; i < n; i++){
-//       result[i] = i
-//   }
-//   return result
-// }
 
 function getHoursTotal(hoursWorked, wk1, wk2){
     var sum = hoursWorked
@@ -144,7 +124,14 @@ function HourInput () {
         useEffect(() => {
           setHoursWorked(diffs.reduce((a,b) => a + b, 0))
         })   
-    }     
+    } 
+    
+    function reset(){
+      setHoursWorked(0)
+      setHoursReqd(85)
+      setWk1(0)
+      setWk2(0)
+    }
     
     return ( 
         <div>
@@ -219,6 +206,9 @@ function HourInput () {
               </tr>
             </tbody>
           </table>
+          <button onClick={() => reset()}>
+            Reset
+          </button>
         </div>
           
       );
