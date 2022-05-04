@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import TimeSelector from "./TimeSelector"
 import { useState } from "react"
 import { round } from './Utils'
+import InputField from "./InputField";
 
 
 const anchorDate = new Date("2022-02-19"); //Must be a date that exists as a previous start to a pay period. Make this variable and inputtable
@@ -68,30 +69,9 @@ function getRange(startDate) {
   return dates;
 }
 
-function getHoursTotal(hoursWorked, wk1, wk2){
-    var sum = hoursWorked
-    wk1 = parseFloat(wk1)
-    wk2 = parseFloat(wk2)
-   
-    if (!isNaN(wk1)){
-      sum += wk1
-    } 
-    if (!isNaN(wk2)){
-      sum += wk2
-    }
-    return round(sum,2)
-}
 
 
-function getResultString(hoursWorked, hoursReqd){
-  const diff = round(hoursReqd-hoursWorked,2)
-  if (diff > 0)
-    return "You are short "+diff+" hours " + String.fromCodePoint(0x1F612)
-  else if (diff < 0)
-    return "You are over "+-diff+" hours " + String.fromCodePoint(0x1F604)
-  else
-    return "Your hours are perfect " + String.fromCodePoint(0x2705)
-}
+
 
 const selectors = genSelectors()
 
@@ -111,9 +91,6 @@ function genSelectors () {
 function HourInput () {
     const diffs = new Array(lengthOfPayPeriod).fill(0)
     const [hoursWorked, setHoursWorked] = useState(0)
-    const [hoursReqd, setHoursReqd] = useState(85)
-    const [wk1, setWk1] = useState(0)
-    const [wk2, setWk2] = useState(0)
 
     const pushHours = (diff, idx) => {
         if (diff !== null && diff !== 'X'){
@@ -125,97 +102,30 @@ function HourInput () {
           setHoursWorked(diffs.reduce((a,b) => a + b, 0))
         })   
     } 
-    
-    function reset(){
-      setHoursWorked(0)
-      setHoursReqd(85)
-      setWk1(0)
-      setWk2(0)
-    }
-    
+
+      
     return ( 
-        <div>
+        <div>     
           <table>
             <tbody>
-              <tr>
-                <td>
-                  Hours required per period {     }
-                  <input
-                    className="input"
-                    type="text"
-                    pattern="[0-9]*"
-                    value={hoursReqd}
-                    onChange={(e) => 
-                      setHoursReqd((v) => (e.target.validity.valid ? e.target.value : v))
-                    } /> 
+                <td>{
+                    selectors.map((selector,index) => {
+                      return (             
+                        <tr key={selector.id +":"+ index}>
+                          <td>
+                            <TimeSelector id={selector.id} sendDiff={pushHours} label={selector.label}/>
+                          </td>
+                        </tr>               
+                      )
+                    })   
+                    }
                 </td>
-              </tr>
+                <td><InputField hoursWorked={hoursWorked}/></td>
             </tbody>
           </table>
-
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  Week 1 hours: {     }
-                  <input 
-                    className="input"
-                    type="text"
-                    pattern="^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$"
-                    value={wk1}
-                    onChange={(e) => 
-                      setWk1((v) => (e.target.validity.valid ? e.target.value : v))
-                    } /> 
-                </td>
-                <td>
-                  Week 2 hours: {     }
-                  <input 
-                    className="input"
-                    type="text"
-                    pattern="^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$"
-                    value={wk2}
-                    onChange={(e) => 
-                      setWk2((v) => (e.target.validity.valid ? e.target.value : v))
-                    } /> 
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-
-         
-
-          <table>
-            <tbody>
-              {
-                selectors.map((selector,index) => {
-                  return (             
-                     <tr key={selector.id +":"+ index}>
-                       <td>
-                         <TimeSelector id={selector.id} sendDiff={pushHours} label={selector.label}/>
-                       </td>
-                     </tr>               
-                  )
-                })   
-              }
-              <tr>
-                <td>You have worked a total of {getHoursTotal(hoursWorked, wk1, wk2)} hours this pay-period</td>
-              </tr>
-              <tr>
-                <td>{getResultString(getHoursTotal(hoursWorked, wk1, wk2), hoursReqd)}</td>
-              </tr>
-            </tbody>
-          </table>
-          <button onClick={() => reset()}>
-            Reset
-          </button>
         </div>
           
       );
-
-
-
-
 }
 
 export default HourInput
