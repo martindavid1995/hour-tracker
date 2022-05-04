@@ -9,9 +9,11 @@ function InputField({hoursWorked}){
     const [hoursReqd, setHoursReqd] = useState(85)
     const [wk1, setWk1] = useState(0)
     const [wk2, setWk2] = useState(0)
+    const [miscHrs, setMiscHrs] = useState(0)
 
 
     function reset(){
+        setMiscHrs(0)
         setHoursReqd(85)
         setWk1(0)
         setWk2(0)
@@ -57,6 +59,18 @@ function InputField({hoursWorked}){
                     </td>
                 </tr>
                 <tr>
+                    <td className='new'><label>Enter Miscellaneous Hours:</label></td>
+                    <td className='new'>
+                    <input         
+                            type="text"
+                            pattern="^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$"
+                            value={miscHrs}
+                            onChange={(e) => 
+                            setMiscHrs((v) => (e.target.validity.valid ? e.target.value : v))
+                            } /> 
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <button onClick={() => reset()}>
                             Reset
@@ -64,7 +78,7 @@ function InputField({hoursWorked}){
                     </td>
                 </tr>
                 <tr>
-                    <OutputComponent hoursReqd={hoursReqd} wk1={wk1} wk2={wk2} hoursWorked={hoursWorked}/>
+                    <OutputComponent hoursReqd={hoursReqd} wk1={wk1} wk2={wk2} miscHrs={miscHrs} hoursWorked={hoursWorked}/>
                 </tr>
             </tbody></table>
         </div>

@@ -2,14 +2,17 @@ import React  from "react";
 import { useState } from "react"
 import { round } from "./Utils"
 
-function getTotHrsWorked(wk1, wk2, hoursWorked){
+function getTotHrsWorked(wk1, wk2, miscHrs, hoursWorked){
     wk1 = parseFloat(wk1)
     wk2 = parseFloat(wk2)
+    miscHrs = parseFloat(miscHrs)
     var total = hoursWorked
     if (!isNaN(wk1))
         total += wk1
     if (!isNaN(wk2))
         total += wk2
+    if (!isNaN(miscHrs))
+        total += miscHrs
     return round(total,2)
 }
 
@@ -23,9 +26,9 @@ function getResultString(hoursWorked, hoursReqd){
       return "Your hours are perfect " + String.fromCodePoint(0x2705)
   }
 
-function OutputComponent({hoursReqd, wk1, wk2, hoursWorked}) {
+function OutputComponent({hoursReqd, wk1, wk2, miscHrs, hoursWorked}) {
 
-    var totHoursWorked = getTotHrsWorked(wk1,wk2,hoursWorked)
+    var totHoursWorked = getTotHrsWorked(wk1, wk2, miscHrs, hoursWorked)
 
     return(
         <div>
