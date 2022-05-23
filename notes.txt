@@ -1,0 +1,19 @@
+Make changes on master.
+Commit all main commits to master branch.
+
+git status //show current branch
+git switch master //make sure on master
+**change code**
+git add . //add all changes to staging area
+git commit -m "msg" //commit LOCALLY
+git push //push commit to remote
+
+
+Want to try something you might want to revert? create a new branch and make changes on there
+
+When you want to put it online, merge into gh-pages
+git switch gh-pages //sit on gh-pages branch
+git merge master //merge from master into gh-pages
+git add . //stage the new changes from master
+git commit -m "syncing gh-pages" //commit the changes to the gh-pages branch
+git push gh-pages //push gh-pages to remote

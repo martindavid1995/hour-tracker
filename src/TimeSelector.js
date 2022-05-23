@@ -4,7 +4,7 @@ import moment from 'moment';
 
 
 const startTime = moment('06:00 am', 'hh:mm a');
-const endTime = moment('09:00 pm', 'hh:mm a')
+const endTime = moment('10:00 pm', 'hh:mm a')
 var step = 30
 
 

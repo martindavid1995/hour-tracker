@@ -21,6 +21,7 @@ function InputField({hoursWorked}){
 
     return(
         <div>
+            <p><h3>Input Hours Worked Here</h3></p>
             <table className='ifield'><tbody>
                 <tr>
                     <td className='new'><label>Hours required per pay-period:</label></td>
@@ -59,7 +60,7 @@ function InputField({hoursWorked}){
                     </td>
                 </tr>
                 <tr>
-                    <td className='new'><label>Enter Miscellaneous Hours:</label></td>
+                    <td className='new'><label>Miscellaneous aditional hours:</label></td>
                     <td className='new'>
                     <input         
                             type="text"
